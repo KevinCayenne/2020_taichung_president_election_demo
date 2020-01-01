@@ -63,3 +63,13 @@ node_modules/
 
 # dotenv environment variables file
 .env
+
+# others
+.vscode
+*.pyc
+__pycache__
+db.sqlite3
+Include
+Lib
+Scripts
+tcl
