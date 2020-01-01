@@ -1,0 +1,15 @@
+html,body{
+    font-family: 'Noto Sans TC','微軟正黑體', 'sans-serif','serif';
+}
+
+form{
+  margin-top: 150px;
+  width: 40%;
+}
+
+@media screen and (max-width: 768px){
+  form{
+    margin-top: 50px;
+    width: 80%;
+  }
+}

@@ -1,0 +1,213 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+SC:200,300,400,500,600,700,900&subset=chinese-simplified,japanese');
+
+div,footer,section,article,aside,header{
+    display: block;
+}
+
+
+html,body{
+    font-family: 'Noto Sans TC','微軟正黑體', 'sans-serif','serif';
+    font-size: 10px;
+}
+
+img{
+    max-width: 100%;
+}
+
+h1{
+    font-size: 3em;
+    margin: 0;
+    width: 100%;
+}
+
+p{
+    margin: 0;
+}
+
+.pageTitle{
+    border-bottom: 1px solid #000;
+    font-size: 1rem;
+    margin: 0 0 0 0;
+    padding-top: 2em;
+    width: 100%;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.btn-secondary{
+    background: #B3B3B3;
+    border-color:#B3B3B3;
+    font-size: 1.8em;;
+    width: 100%;
+    margin: 15px;
+}
+
+.item{
+    text-align: center;
+    margin-top: 3em;
+}
+
+.name{
+    font-size: 2em;
+}
+
+
+.votesText{
+    font-size: 1.5em;
+    margin-top: 1em;
+}
+
+.votes{
+    font-size: 5em;
+    font-weight: bold;
+}
+
+.colorBar_1,
+.colorBar_2,
+.colorBar_3{
+    height: 8px;
+}
+
+.source{
+    font-size: .5em;
+    align-self: flex-end;
+    margin-bottom: 2px;
+}
+
+.team{
+    font-size: 1.75em;
+    margin-top: 5px;
+}
+
+.colorBar_1{
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#934907+0,fe6407+100 */
+    background: #934907; /* Old browsers */
+    background: -moz-linear-gradient(left,  #934907 0%, #fe6407 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  #934907 0%,#fe6407 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  #934907 0%,#fe6407 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#934907', endColorstr='#fe6407',GradientType=1 ); /* IE6-9 */
+
+}
+
+.colorBar_2{
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000038+0,0000aa+100 */
+    background: #000038; /* Old browsers */
+    background: -moz-linear-gradient(left,  #000038 0%, #0000aa 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  #000038 0%,#0000aa 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  #000038 0%,#0000aa 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000038', endColorstr='#0000aa',GradientType=1 ); /* IE6-9 */
+}
+
+
+.colorBar_3{
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#005700+1,009a00+100 */
+    background: #005700; /* Old browsers */
+    background: -moz-linear-gradient(left,  #005700 1%, #009a00 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  #005700 1%,#009a00 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  #005700 1%,#009a00 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#005700', endColorstr='#009a00',GradientType=1 ); /* IE6-9 */
+
+}
+
+
+footer{
+    background: #214E4A;
+    color: #fff;
+    height: 10em;
+}
+
+
+.center{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.time{
+    text-align: center;
+    font-size: 1.75em;
+    margin-bottom: 3em;
+    margin-top: 3em;
+}
+
+@media (max-width: 576px) {
+
+
+
+}
+
+@media (min-width: 768px) {
+
+    .votes{
+        font-size: 3em;
+        font-weight: bold;
+    }
+
+    .item{
+        margin-top: 5em;
+    }
+
+    .btn-secondary{
+        margin: 0;
+    }
+
+    .mainWrap{
+        min-height: calc( 100vh - 51px );
+    }
+
+    footer{
+        height: 51px;
+    }
+}
+
+@media (min-width: 992px) {
+
+    body{
+        font-size: 12px;
+    }
+
+    .name{
+        font-size: 3em;
+    }
+
+    .votesText{
+        font-size: 1.75em;
+    }
+
+
+    .votes{
+        font-size: 5em;
+    }
+
+    .colorBar_1,
+    .colorBar_2,
+    .colorBar_3{
+        height: 15px;
+    }
+
+    .mainWrap{
+        min-height: calc( 100vh - 56px );
+    }
+
+    footer{
+        height: 56px;
+        display: flex;
+        align-items: center;
+    }
+
+
+
+    .team{
+        margin-top: 0;
+    }
+
+ }
+
+ @media (min-width: 1920px) {
+
+    .container{
+        max-width: 1440px;
+    }
+
+
+ }
