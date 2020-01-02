@@ -3,10 +3,53 @@
 {% block content %}
 
 <div>
-  <h1>{{ request.session.user_name }}!  歡迎！</h1>
-  <a href="/logout/">登出</a>
-  <h3 id="show-value">輸入頁面</h3>
+  <div class="alert alert-primary text-right rounded-0">{{ request.session.user_name }}! 您好！<a href="/logout/">登出</a></div>
+  <h4 class="text-center mt-3">2020 總統、副總統候選人</h4>
+  <h4 class="text-center mt-3">台中市區票數回報登錄頁面</h4>
   <hr>
+
+<div class="container">
+  <form id="update-form" class="form px-3 py-3" action="">
+    <div id="select-form">
+      <div class="form-group">
+        <select id="dept-select" class="custom-select" onchange="getTbox(this)" style="font-size: 20px;" required>
+          <option selected>請選擇行政區</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <select id="tbox-select" class="custom-select" onchange="getTboxVal(this)" style="font-size: 20px;" required>
+          <option selected>請選擇投開票所</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="font-weight-bold" style="font-size: 17px;">投票所名稱</label>
+        <div id="tboxNameDiv" class="bg-light py-2 px-2 border rounded"></div>
+      </div>
+    </div>
+    <hr>
+    <h5 class="mt-4 mb-3 bg-light py-3 rounded text-center">票數回報</h5>
+    <div class="form-group px-1">
+      <div class="form-row mt-2">
+        <label for="Song" class="px-3 py-1 rounded text-white" style="background-color: #ff8c00">1. 宋楚瑜</label>
+        <input id="Song" name="Song" class="form-control alert-warning" type="text" value="" required>
+      </div>
+      <div class="form-row mt-2">
+        <label for="Han" class="bg-primary px-3 py-1 rounded text-white">2. 韓國瑜</label>
+        <input id="Han" name="Han" class="form-control alert-primary" type="text" value="" required>
+      </div>
+      <div class="form-row mt-2">
+        <label for="Tsai" class="bg-success px-3 py-1 rounded text-white">3. 蔡英文</label>
+        <input id="Tsai" name="Tsai" class="form-control alert-success" type="text" value="" required>
+      </div>
+    </div>
+    <hr class="mt-4">
+    <div class="text-center">
+       <input id="voteUpdate" class="btn btn-lg btn-primary shadow" type="button" value="更新票數" onclick="voteUpdater()">
+    </div>
+  </form>
+
+</div>
+
 
 </div>
 <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -17,12 +60,12 @@
 <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-analytics.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-database.js"></script>
 
-
-  <!-- Add Firebase products that you want to use -->
-  <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-firestore.js"></script>
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-firestore.js"></script>
 
 <script>
+
   // Your web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyBTuYfTd5tKAZQmLDQqRVmfsZU1KKtlJzE",
@@ -34,15 +77,138 @@
     appId: "1:267681440932:web:4c860406b341bef385b231",
     measurementId: "G-R7PM1WJM7V"
   };
+
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+
+  // auth set
+  var email = 'kevin81319@gmail.com';
+  var password = 'test123';
+  firebase.auth().signInWithEmailAndPassword(email, password)
+  .then(() => {
+    var user = firebase.auth().currentUser;
+  })
+  .catch((error) => {
+    console.log('尚未登入成功！');
+  });
 
   // Get a reference to the database service
   var database = firebase.database();
 
-  database.ref("/1/").once('value', function (snapshot) {
+  // Show tboxes names in select options when dept name was selected
+  function getTbox(dept){
+    var value = dept.value;
+    var obj = document.getElementById("tbox-select");
+    var select_obj = document.getElementById("tboxNameDiv");
+
+    obj.innerHTML = '<option selected>請選擇投開票所</option>'; //reset the tbox-select
+    select_obj.innerHTML = '';
+    // console.log(obj);
+
+    database.ref("/").once('value', function (snapshot) {
+      snapshot.forEach(function (item) {
+        if(value === item.val().deptCode){
+          var tboxName = item.val().tboxName;
+          var tboxList = Object.keys(tboxName);
+          // console.log(tboxList);
+
+          var tboxNo = [];
+          for(i in tboxList){
+            tboxNo.push(tboxName[tboxList[i]].tboxNo);
+            // obj.add(new Option(tboxName[tboxList[i]].tboxNo, tboxName[tboxList[i]].tboxNo));
+          }
+
+          for(i in tboxNo.sort()){
+            obj.add(new Option(tboxNo.sort()[i], tboxNo.sort()[i]));
+          }
+
+        }
+      })
+    });
+  }
+
+  // if the tbox value was select
+  function getTboxVal(tbox){
+
+    // get deptName and tbox values
+    var deptName = $("#dept-select").val();
+    var tbox = $("#tbox-select").val();
+    var select_obj = document.getElementById("tboxNameDiv");
+
+    // check if the option selected
+    if(deptName !== '請選擇行政區' && tbox !== '請選擇投開票所'){
+      console.log(deptName);
+      console.log(tbox);
+
+      database.ref("/").once('value', function (snapshot) {
+        snapshot.forEach(function (item) {
+          if(deptName === item.val().deptCode){
+            var tboxName = item.val().tboxName;
+            var tboxList = Object.keys(tboxName);
+            // console.log(tboxList);
+            for(i in tboxList){
+              if (tbox === tboxName[tboxList[i]].tboxNo){
+                // console.log(tboxList[i]);
+                // console.log(tboxName[tboxList[i]].tboxNo);
+                select_obj.innerHTML = tboxList[i];
+                $('#Song').val(tboxName[tboxList[i]].Song);
+                $('#Han').val(tboxName[tboxList[i]].Han);
+                $('#Tsai').val(tboxName[tboxList[i]].Tsai);
+              }
+            }
+          }
+        })
+      });
+    } else {
+      select_obj.innerHTML = '';
+    }
+
+  }
+
+  // update the vote data to the firebase
+  function voteUpdater(){
+    var deptName = $('#dept-select').val();
+    var tbox = $('#tbox-select').val();
+    var tboxName = $('#tboxNameDiv').html();
+    var Song_vote = $('#Song').val();
+    var Han_vote = $('#Han').val();
+    var Tsai_vote = $('#Tsai').val();
+    var keyList =[];
+
+    database.ref("/").once('value', function (snapshot) {
+      var val = snapshot.val();
+      var obj_keys = Object.keys(snapshot.val());
+
+      for(i in obj_keys){
+        if(val[i].deptCode === deptName){
+           // console.log(i);
+           // console.log(val[i]);
+           var path = "/" + i + "/tboxName/" + tboxName + "/";
+           // console.log(path);
+           database.ref(path).update({
+             Song: Song_vote,
+             Han: Han_vote,
+             Tsai: Tsai_vote
+           })
+           .then(function () {
+               alert("修改成功！");
+           }).catch(function () {
+               alert("伺服器發生錯誤，請稍後再試");
+           });
+        }
+      }
+    });
+  }
+
+  // Get and show dept names select options when start page
+  database.ref("/").once('value', function (snapshot) {
     var data = snapshot.val();
-    console.log(data);
+
+    snapshot.forEach(function (item) {
+      var obj = document.getElementById("dept-select");
+      obj.add(new Option(item.val().deptCode, item.val().deptCode));
+    })
+
   });
 
 </script>

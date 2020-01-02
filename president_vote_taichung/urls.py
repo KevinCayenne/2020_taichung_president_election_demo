@@ -21,7 +21,7 @@ import voteInfo
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('voteInfo.urls'), name="home"),
+    path('', include('voteInfo.urls')),
     path('login/', include('login.urls'), name="login"),
     path('logout/', login.views.logout),
 ]

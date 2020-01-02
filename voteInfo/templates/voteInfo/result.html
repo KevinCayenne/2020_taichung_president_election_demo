@@ -17,7 +17,7 @@
     <section class="container center mainWrap">
             <div class="row pageTitle align-items-end">
                 <div class="col-12 col-md-auto mr-auto">
-                    <div class="row"><h1>總統、副總統候選人最新得票數</h1></div>
+                    <div class="row"><h1>總統、副總統候選人台中市區最新得票數</h1></div>
                 </div>
                 <div class="col-12 col-md-auto text-center">
                     <div class="row">
@@ -67,4 +67,35 @@
         </section>
     </footer>
 
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-database.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-firestore.js"></script>
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyBTuYfTd5tKAZQmLDQqRVmfsZU1KKtlJzE",
+        authDomain: "presidental-vote-taichung.firebaseapp.com",
+        databaseURL: "https://presidental-vote-taichung.firebaseio.com",
+        projectId: "presidental-vote-taichung",
+        storageBucket: "presidental-vote-taichung.appspot.com",
+        messagingSenderId: "267681440932",
+        appId: "1:267681440932:web:4c860406b341bef385b231",
+        measurementId: "G-R7PM1WJM7V"
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      // Get a reference to the database service
+      var database = firebase.database();
+
+    </script>
 {% endblock %}
