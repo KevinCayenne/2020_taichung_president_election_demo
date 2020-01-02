@@ -32,21 +32,21 @@
                     <img class="photo" src="{% static 'images/main_img_01.png' %}" width="480">
                     <p class="name">宋楚瑜 /余湘</p>
                     <p class="votesText">最新得票數</p>
-                    <p class="votes">8,001,932</p class="votes">
+                    <p class="votes" id="Song-vote-total"></p class="votes">
                     <div class="colorBar_1"></div>
                 </div>
                 <div class="col-md-4 item">
                     <img class="photo" src="{% static 'images/main_img_02.png' %}" width="480">
                     <p class="name">韓國瑜 /張善政</p>
                     <p class="votesText">最新得票數</p>
-                    <p class="votes">8,001,932</p class="votes">
+                    <p class="votes" id="Han-vote-total"></p class="votes">
                     <div class="colorBar_2"></div>
                 </div>
                 <div class="col-md-4 item">
                     <img class="photo" src="{% static 'images/main_img_03.png' %}" width="480">
                     <p class="name">蔡英文 /賴清德</p>
                     <p class="votesText">最新得票數</p>
-                    <p class="votes">8,001,932</p class="votes">
+                    <p class="votes" id="Tsai-vote-total"></p class="votes">
                     <div class="colorBar_3"></div>
                 </div>
             </div>
@@ -96,6 +96,30 @@
 
       // Get a reference to the database service
       var database = firebase.database();
+
+      function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+
+      var total_Song = 0;
+      var total_Han = 0;
+      var total_Tsai = 0;
+
+      database.ref("/").on('value', function (snapshot) {
+          snapshot.forEach(function (item) {
+            // console.log(item.val().tboxName);
+            for(i in item.val().tboxName){
+              // console.log(item.val().tboxName[i]);
+              total_Song = total_Song + parseInt(item.val().tboxName[i].Song);
+              total_Han = total_Han + parseInt(item.val().tboxName[i].Han);
+              total_Tsai = total_Tsai + parseInt(item.val().tboxName[i].Tsai);
+            }
+          });
+
+          $('#Song-vote-total').html(numberWithCommas(total_Song));
+          $('#Han-vote-total').html(numberWithCommas(total_Han));
+          $('#Tsai-vote-total').html(numberWithCommas(total_Tsai));
+      });
 
     </script>
 {% endblock %}
