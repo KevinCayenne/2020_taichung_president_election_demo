@@ -15,17 +15,17 @@
 </head>
 
     <section class="container center mainWrap">
-            <div class="row pageTitle align-items-end">
+            <div class="row pageTitle align-items-end pb-4">
                 <div class="col-12 col-md-auto mr-auto">
                     <div class="row"><h1>總統、副總統候選人台中市區最新得票數</h1></div>
                 </div>
-                <div class="col-12 col-md-auto text-center">
+                <!-- <div class="col-12 col-md-auto text-center">
                     <div class="row">
                         <button type="button" class="btn btn-secondary btn-lg">
                         更新
                     </button>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="row mainCon">
                 <div class="col-md-4 item">
@@ -52,7 +52,7 @@
             </div>
             <div class="col-12 time">
                 <p>選舉結果請依中選會公告</p>
-                <p>最後更新時間：<span>2019/1/11 19:55:39</span></p>
+                <p>最後更新時間：<span id="datetime"></span></p>
 
             </div>
 
@@ -101,11 +101,12 @@
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       }
 
-      var total_Song = 0;
-      var total_Han = 0;
-      var total_Tsai = 0;
-
       database.ref("/").on('value', function (snapshot) {
+
+          var total_Song = 0;
+          var total_Han = 0;
+          var total_Tsai = 0;
+
           snapshot.forEach(function (item) {
             // console.log(item.val().tboxName);
             for(i in item.val().tboxName){
@@ -116,9 +117,18 @@
             }
           });
 
+          var currentdate = new Date();
+          var datetime = currentdate.getFullYear() + "/"
+                + (currentdate.getMonth()+1)  + "/"
+                + currentdate.getDate() + " "
+                + currentdate.getHours() + ":"
+                + currentdate.getMinutes() + ":"
+                + currentdate.getSeconds();
+
           $('#Song-vote-total').html(numberWithCommas(total_Song));
           $('#Han-vote-total').html(numberWithCommas(total_Han));
           $('#Tsai-vote-total').html(numberWithCommas(total_Tsai));
+          $('#datetime').html(datetime)
       });
 
     </script>
