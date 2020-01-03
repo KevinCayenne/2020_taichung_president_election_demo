@@ -3,11 +3,25 @@
 
 {% block content %}
 
-<div class="alert alert-primary text-right rounded-0">
-  <span class="align-middle">{{ request.session.user_name }}! 您好！</span>
+<head>
+  <style media="screen">
+    th{
+      white-space: nowrap;
+    }
+
+    @media screen and (max-width: 600px){
+      #logout{
+
+      }
+    }
+  </style>
+</head>
+
+<div class="bg-light py-3 px-3 text-right shadow">
+  <span class="align-middle">{{ request.session.user_name }} 您好！</span>
   <a class="btn btn-sm btn-primary" href="/">呈現頁面</a>
   <a class="btn btn-sm btn-success" href="/index">回報頁面</a>
-  <a class="btn btn-sm btn-secondary" href="/logout/">登出</a>
+  <a id="logout" class="btn btn-sm btn-secondary" href="/logout/">登出</a>
 </div>
 
 <h4 class="text-center mt-3">統計資料</h4>
@@ -15,13 +29,13 @@
 
 <div class="container">
 
-<div class="table-responsive table-hover mt-3"></div>
+<div class="table-responsive-lg mt-3">
   <table class="table">
     <thead>
       <th>行政區</th>
-      <th class="alert-warning">1. 宋楚瑜</th>
-      <th class="alert-primary">2. 韓國瑜</th>
-      <th class="alert-success">3. 蔡英文</th>
+      <th class="alert-warning text-center">1. 宋楚瑜</th>
+      <th class="alert-primary text-center">2. 韓國瑜</th>
+      <th class="alert-success text-center">3. 蔡英文</th>
     </thead>
     <tbody id="stat-tbody">
 
@@ -29,7 +43,7 @@
     </tbody>
 
   </table>
-
+  </div>
 
 </div>
 
@@ -80,7 +94,7 @@
         dept_total_Tsai = dept_total_Tsai + parseInt(item.val().tboxName[i].Tsai);
       }
 
-      $('#stat-tbody').append('<tr><td>'+ deptCode +'</td><td>'+ dept_total_Song +'</td><td>'+ dept_total_Han +'</td><td>'+ dept_total_Tsai +'</td></tr>');
+      $('#stat-tbody').append('<tr><td>'+ deptCode +'</td><td class="table-warning text-right">'+ dept_total_Song +'</td><td class="table-primary text-right">'+ dept_total_Han +'</td><td class="table-success text-right">'+ dept_total_Tsai +'</td></tr>');
 
     });
   });
