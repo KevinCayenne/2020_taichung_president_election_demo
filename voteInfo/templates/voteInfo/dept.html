@@ -1,0 +1,90 @@
+{% extends 'voteInfo/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="alert alert-primary text-right rounded-0">
+  <span class="align-middle">{{ request.session.user_name }}! 您好！</span>
+  <a class="btn btn-sm btn-primary" href="/">呈現頁面</a>
+  <a class="btn btn-sm btn-success" href="/index">回報頁面</a>
+  <a class="btn btn-sm btn-secondary" href="/logout/">登出</a>
+</div>
+
+<h4 class="text-center mt-3">統計資料</h4>
+<hr>
+
+<div class="container">
+
+<div class="table-responsive table-hover mt-3"></div>
+  <table class="table">
+    <thead>
+      <th>行政區</th>
+      <th class="alert-warning">1. 宋楚瑜</th>
+      <th class="alert-primary">2. 韓國瑜</th>
+      <th class="alert-success">3. 蔡英文</th>
+    </thead>
+    <tbody id="stat-tbody">
+
+
+    </tbody>
+
+  </table>
+
+
+</div>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-database.js"></script>
+
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-firestore.js"></script>
+
+<script>
+
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBTuYfTd5tKAZQmLDQqRVmfsZU1KKtlJzE",
+    authDomain: "presidental-vote-taichung.firebaseapp.com",
+    databaseURL: "https://presidental-vote-taichung.firebaseio.com",
+    projectId: "presidental-vote-taichung",
+    storageBucket: "presidental-vote-taichung.appspot.com",
+    messagingSenderId: "267681440932",
+    appId: "1:267681440932:web:4c860406b341bef385b231",
+    measurementId: "G-R7PM1WJM7V"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  var database = firebase.database();
+
+  database.ref("/").on('value', function (snapshot) {
+
+    snapshot.forEach(function (item) {
+      // console.log(item.val().deptCode);
+
+      var dept_total_Song = 0;
+      var dept_total_Han = 0;
+      var dept_total_Tsai = 0;
+
+      for(i in item.val().tboxName){
+        var deptCode = item.val().deptCode;
+        dept_total_Song = dept_total_Song + parseInt(item.val().tboxName[i].Song);
+        dept_total_Han = dept_total_Han + parseInt(item.val().tboxName[i].Han);
+        dept_total_Tsai = dept_total_Tsai + parseInt(item.val().tboxName[i].Tsai);
+      }
+
+      $('#stat-tbody').append('<tr><td>'+ deptCode +'</td><td>'+ dept_total_Song +'</td><td>'+ dept_total_Han +'</td><td>'+ dept_total_Tsai +'</td></tr>');
+
+    });
+  });
+
+</script>
+
+{% endblock %}

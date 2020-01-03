@@ -6,4 +6,5 @@ from voteInfo import views
 urlpatterns = [
     path('', views.result, name="home"),
     path('index/', views.index),
+    path('dept/', views.dept),
 ]

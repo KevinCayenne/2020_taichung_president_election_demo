@@ -3,8 +3,13 @@
 {% block content %}
 
 <div>
-  <div class="alert alert-primary text-right rounded-0">{{ request.session.user_name }}! 您好！<a href="/logout/">登出</a></div>
-  <h4 class="text-center mt-3">2020蔡英文連任台中競選總部</h4>
+  <div class="alert alert-primary text-right rounded-0">
+    <span class="align-middle">{{ request.session.user_name }}! 您好！</span>
+    <a class="btn btn-sm btn-primary" href="/">呈現頁面</a>
+    <a class="btn btn-sm btn-success" href="/dept/">統計資料</a>
+    <a class="btn btn-sm btn-secondary" href="/logout/">登出</a>
+  </div>
+  <h4 class="text-center mt-3">2020 蔡英文總統連任台中競選總部</h4>
   <h4 class="text-center mt-3">總統開票回報登錄頁面</h4>
   <hr>
 
@@ -43,10 +48,30 @@
       </div>
     </div>
     <hr class="mt-4">
-    <div class="text-center">
-       <input id="voteUpdate" class="btn btn-lg btn-primary shadow" type="button" value="更新票數" onclick="voteUpdater()">
+    <div class="text-center mb-3">
+       <input id="voteUpdate" class="btn btn-lg btn-primary shadow" type="button" value="更新票數" onclick="voteUpdater()" data-toggle="modal" data-target="#UpdateCheckModal">
     </div>
   </form>
+
+<!-- Modal -->
+<div class="modal fade" id="UpdateCheckModal" tabindex="-1" role="dialog" aria-labelledby="UpdateCheckModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">更新確認</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">確定</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </div>
 
@@ -175,29 +200,42 @@
     var Tsai_vote = $('#Tsai').val();
     var keyList =[];
 
-    database.ref("/").once('value', function (snapshot) {
-      var val = snapshot.val();
-      var obj_keys = Object.keys(snapshot.val());
+    if(deptName !== '請選擇行政區' && tbox !== '請選擇投開票所' && tboxName && Song_vote && Han_vote && Tsai_vote){
+      database.ref("/").once('value', function (snapshot) {
+        var val = snapshot.val();
+        var obj_keys = Object.keys(snapshot.val());
 
-      for(i in obj_keys){
-        if(val[i].deptCode === deptName){
-           // console.log(i);
-           // console.log(val[i]);
-           var path = "/" + i + "/tboxName/" + tboxName + "/";
-           // console.log(path);
-           database.ref(path).update({
-             Song: Song_vote,
-             Han: Han_vote,
-             Tsai: Tsai_vote
-           })
-           .then(function () {
-               alert("修改成功！");
-           }).catch(function () {
-               alert("伺服器發生錯誤，請稍後再試");
-           });
+        for(i in obj_keys){
+          if(val[i].deptCode === deptName){
+             // console.log(i);
+             // console.log(val[i]);
+             var path = "/" + i + "/tboxName/" + tboxName + "/";
+             // console.log(path);
+             database.ref(path).update({
+               Song: Song_vote,
+               Han: Han_vote,
+               Tsai: Tsai_vote
+             })
+             .then(function () {
+                 $(".modal-body").removeClass('alert-danger');
+                 $(".modal-body").removeClass('alert-warning');
+                 $(".modal-body").addClass('alert-primary');
+                 $(".modal-body").html('資料更新成功！');
+             }).catch(function () {
+                 $(".modal-body").removeClass('alert-warning');
+                 $(".modal-body").removeClass('alert-primary');
+                 $(".modal-body").addClass('alert-danger');
+                 $(".modal-body").html('伺服器發生錯誤，請稍後再試。');
+             });
+          }
         }
-      }
-    });
+      });
+    }else{
+      $(".modal-body").removeClass('alert-danger');
+      $(".modal-body").removeClass('alert-primary');
+      $(".modal-body").addClass('alert-warning');
+      $(".modal-body").html('資料尚未完整，請確實填寫後提交。');
+    }
   }
 
   // Get and show dept names select options when start page
