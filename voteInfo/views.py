@@ -8,13 +8,9 @@ def result(request):
 def index(request):
     if not request.session.get('is_login', None):
         return redirect('/login/')
-
-    user = models.User.objects.get(username=request.user)
-    return render(request, "voteInfo/index.html", {'password': user.password})
+    return render(request, "voteInfo/index.html")
 
 def dept(request):
     if not request.session.get('is_login', None):
         return redirect('/login/')
-
-    user = models.User.objects.get(username=request.user)
-    return render(request, "voteInfo/dept.html", {'password': user.password})
+    return render(request, "voteInfo/dept.html")
