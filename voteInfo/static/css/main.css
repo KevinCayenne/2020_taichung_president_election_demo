@@ -63,6 +63,28 @@ p{
     font-weight: bold;
 }
 
+.vote-count{
+    animation-name: vote;
+    animation-duration: 0.5s;
+}
+
+@keyframes vote{
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+
 .colorBar_1,
 .colorBar_2,
 .colorBar_3{

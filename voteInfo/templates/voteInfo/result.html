@@ -32,21 +32,21 @@
                     <img class="photo" src="{% static 'images/main_img_01.png' %}" width="480">
                     <p class="name">宋楚瑜 /余湘</p>
                     <p class="votesText">最新得票數</p>
-                    <p class="votes" id="Song-vote-total"></p class="votes">
+                    <p class="votes" id="Song-vote-total"></p>
                     <div class="colorBar_1"></div>
                 </div>
                 <div class="col-md-4 item">
                     <img class="photo" src="{% static 'images/main_img_02.png' %}" width="480">
                     <p class="name">韓國瑜 /張善政</p>
                     <p class="votesText">最新得票數</p>
-                    <p class="votes" id="Han-vote-total"></p class="votes">
+                    <p class="votes" id="Han-vote-total"></p>
                     <div class="colorBar_2"></div>
                 </div>
                 <div class="col-md-4 item">
                     <img class="photo" src="{% static 'images/main_img_03.png' %}" width="480">
                     <p class="name">蔡英文 /賴清德</p>
                     <p class="votesText">最新得票數</p>
-                    <p class="votes" id="Tsai-vote-total"></p class="votes">
+                    <p class="votes" id="Tsai-vote-total"></p>
                     <div class="colorBar_3"></div>
                 </div>
             </div>
@@ -117,6 +117,7 @@
             }
           });
 
+          // update the time
           var currentdate = new Date();
           var datetime = currentdate.getFullYear() + "/"
                 + (currentdate.getMonth()+1)  + "/"
@@ -125,9 +126,10 @@
                 + currentdate.getMinutes() + ":"
                 + currentdate.getSeconds();
 
-          $('#Song-vote-total').html(numberWithCommas(total_Song));
-          $('#Han-vote-total').html(numberWithCommas(total_Han));
-          $('#Tsai-vote-total').html(numberWithCommas(total_Tsai));
+          // update the data
+          $('#Song-vote-total').html('<span class="vote-count">' + numberWithCommas(total_Song) + '</span>');
+          $('#Han-vote-total').html('<span class="vote-count">' + numberWithCommas(total_Han) + '</span>');
+          $('#Tsai-vote-total').html('<span class="vote-count">' + numberWithCommas(total_Tsai) + '</span>');
           $('#datetime').html(datetime)
       });
 
