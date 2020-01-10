@@ -4,11 +4,31 @@
 
 <head>
   <style media="screen">
+
+    .custom-combobox {
+      position: relative;
+      display: inline-block;
+    }
+
+    .custom-combobox-toggle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin-left: -1px;
+      padding: 0;
+    }
+
+    .custom-combobox-input {
+      margin: 0;
+      padding: 5px 10px;
+    }
+
     @media screen and (max-width: 335px){
       #logout{
         margin-top: 5px;
       }
     }
+
   </style>
 </head>
 
@@ -32,13 +52,14 @@
         </select>
       </div>
       <div class="form-group">
+        <label class="font-weight-bold" style="font-size: 17px;">請選擇投開票所</label>
         <select id="tbox-select" class="custom-select" onchange="getTboxVal(this)" style="font-size: 20px;" required>
-          <option selected>請選擇投開票所</option>
         </select>
       </div>
+
       <div class="form-group">
         <label class="font-weight-bold" style="font-size: 17px;">投票所名稱</label>
-        <div id="tboxNameDiv" class="bg-light py-2 px-2 border rounded"></div>
+        <div id="tboxNameDiv" class="bg-light py-2 px-2 border rounded font-weight-bold"></div>
       </div>
     </div>
     <hr>
@@ -136,7 +157,7 @@
     var obj = document.getElementById("tbox-select");
     var select_obj = document.getElementById("tboxNameDiv");
 
-    obj.innerHTML = '<option selected>請選擇投開票所</option>'; //reset the tbox-select
+    // obj.innerHTML = '<option selected>請選擇投開票所</option>'; //reset the tbox-select
     select_obj.innerHTML = '';
     // console.log(obj);
 
@@ -149,7 +170,7 @@
           // console.log(item.val().deptCode);
           // console.log(tboxList);
 
-          var tboxNo = [];
+          var tboxNo = [''];
           for(i in tboxList){
             tboxNo.push(tboxName[tboxList[i]].tboxNo + ' ' + tboxList[i]);
             // obj.add(new Option(tboxName[tboxList[i]].tboxNo, tboxName[tboxList[i]].tboxNo));
@@ -159,10 +180,13 @@
             obj.add(new Option(tboxNo.sort()[i], tboxNo.sort()[i]));
           }
 
+          $('#tbox-select').combobox();
+
         }
       })
     });
   }
+
 
   // if the tbox value was select
   function getTboxVal(tbox){
