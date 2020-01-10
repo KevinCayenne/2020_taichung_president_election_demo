@@ -145,11 +145,13 @@
         if(value === item.val().deptCode){
           var tboxName = item.val().tboxName;
           var tboxList = Object.keys(tboxName);
+
+          // console.log(item.val().deptCode);
           // console.log(tboxList);
 
           var tboxNo = [];
           for(i in tboxList){
-            tboxNo.push(tboxName[tboxList[i]].tboxNo);
+            tboxNo.push(tboxName[tboxList[i]].tboxNo + ' ' + tboxList[i]);
             // obj.add(new Option(tboxName[tboxList[i]].tboxNo, tboxName[tboxList[i]].tboxNo));
           }
 
@@ -167,13 +169,13 @@
 
     // get deptName and tbox values
     var deptName = $("#dept-select").val();
-    var tbox = $("#tbox-select").val();
+    var tbox = $("#tbox-select").val().split(' ')[0];
     var select_obj = document.getElementById("tboxNameDiv");
 
     // check if the option selected
     if(deptName !== '請選擇行政區' && tbox !== '請選擇投開票所'){
-      console.log(deptName);
-      console.log(tbox);
+      // console.log(deptName);
+      // console.log(tbox);
 
       database.ref("/").once('value', function (snapshot) {
         snapshot.forEach(function (item) {
