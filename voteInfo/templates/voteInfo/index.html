@@ -51,8 +51,9 @@
           <option selected>請選擇行政區</option>
         </select>
       </div>
-      <div class="form-group">
-        <label class="font-weight-bold" style="font-size: 17px;">請選擇投開票所</label>
+
+      <div class="form-group tbox-select-group">
+        <label for="tbox-select" class="font-weight-bold" style="font-size: 17px;">請選擇投開票所</label>
         <select id="tbox-select" class="custom-select" onchange="getTboxVal(this)" style="font-size: 20px;" required>
           <option selected></option>
         </select>
@@ -154,13 +155,14 @@
 
   // Show tboxes names in select options when dept name was selected
   function getTbox(dept){
+
     var value = dept.value;
     var obj = document.getElementById("tbox-select");
     var select_obj = document.getElementById("tboxNameDiv");
 
     obj.innerHTML = '<option selected></option>'; //reset the tbox-select
     select_obj.innerHTML = '';
-    // console.log(obj);
+    console.log(obj);
 
     database.ref("/").once('value', function (snapshot) {
       snapshot.forEach(function (item) {
@@ -174,16 +176,14 @@
           var tboxNo = [];
           for(i in tboxList){
             tboxNo.push(tboxName[tboxList[i]].tboxNo + ' ' + tboxList[i]);
-            // obj.add(new Option(tboxName[tboxList[i]].tboxNo, tboxName[tboxList[i]].tboxNo));
           }
 
           for(i in tboxNo.sort()){
             obj.add(new Option(tboxNo.sort()[i], tboxNo.sort()[i]));
           }
-
+          
         }
       });
-                // $('#tbox-select').combobox();
     });
   }
 

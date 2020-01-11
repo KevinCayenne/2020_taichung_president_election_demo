@@ -70,6 +70,7 @@
       this.disabled = false;
       this.$container.removeClass('combobox-disabled');
     }
+
   , parse: function () {
       var that = this
         , map = {}
