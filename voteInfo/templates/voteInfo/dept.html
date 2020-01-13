@@ -36,12 +36,11 @@
       <th class="alert-warning text-center">1. 宋楚瑜</th>
       <th class="alert-primary text-center">2. 韓國瑜</th>
       <th class="alert-success text-center">3. 蔡英文</th>
+      <th class="bg-light text-center">加總</th>
     </thead>
     <tbody id="stat-tbody">
 
-
     </tbody>
-
   </table>
   </div>
 
@@ -81,6 +80,9 @@
   database.ref("/").on('value', function (snapshot) {
 
     $('#stat-tbody').html('');
+    var total_Song = 0;
+    var total_Han = 0;
+    var total_Tsai = 0;
 
     snapshot.forEach(function (item) {
       // console.log(item.val().deptCode);
@@ -96,16 +98,27 @@
         dept_total_Tsai = dept_total_Tsai + parseInt(item.val().tboxName[i].Tsai);
       }
 
+      for(i in item.val().tboxName){
+        // console.log(item.val().tboxName[i]);
+        total_Song = total_Song + parseInt(item.val().tboxName[i].Song);
+        total_Han = total_Han + parseInt(item.val().tboxName[i].Han);
+        total_Tsai = total_Tsai + parseInt(item.val().tboxName[i].Tsai);
+      }
+
+      var dept_total = dept_total_Song + dept_total_Han + dept_total_Tsai;
+
       if(dept_total_Tsai < dept_total_Han){
-        $('#stat-tbody').append('<tr><td>'+ deptCode +'</td><td class="song table-warning text-right">'+ dept_total_Song +'</td><td class="han table-primary text-right">'+ dept_total_Han +'</td><td class="tsai table-danger text-right">'+ dept_total_Tsai +'</td></tr>');
+        $('#stat-tbody').append('<tr><td>'+ deptCode +'</td><td class="song table-warning text-right">'+ dept_total_Song +'</td><td class="han table-primary text-right">'+ dept_total_Han + '</td><td class="tsai table-danger text-right">' + dept_total_Tsai + '</td><td class="total table-light text-right">' + dept_total + '</td></tr>');
       }else{
-        $('#stat-tbody').append('<tr><td>'+ deptCode +'</td><td class="song table-warning text-right">'+ dept_total_Song +'</td><td class="han table-primary text-right">'+ dept_total_Han +'</td><td class="tsai table-success text-right">'+ dept_total_Tsai +'</td></tr>');
+        $('#stat-tbody').append('<tr><td>'+ deptCode +'</td><td class="song table-warning text-right">'+ dept_total_Song +'</td><td class="han table-primary text-right">'+ dept_total_Han +'</td><td class="tsai table-success text-right">'+ dept_total_Tsai + '</td><td class="total table-light text-right">' + dept_total + '</td></tr>');
       }
 
     });
+
+    var total = total_Song + total_Han + total_Tsai;
+    $('#stat-tbody').append('<tr><td>' + '加總' + '</td><td class="table-light text-right">' + total_Song + '</td><td class="table-light text-right">' + total_Han + '</td><td class="table-light text-right">' + total_Tsai + '</td><td class="table-light text-right">' + total + '</td></tr>');
+
   });
-
-
 
 </script>
 
