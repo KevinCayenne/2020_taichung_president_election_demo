@@ -1,8 +1,8 @@
 {
   "type": "service_account",
   "project_id": "presidental-vote-taichung",
-  "private_key_id": "c93e288ed4ba7e803967724b4087b63bafa5778b",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDfy717f2o03fr/\nA9u+qXLhNu5K7UJRGBMjYa95haRb9FQu0oqNRzt0L8TBt+gbJccQrm1HhHjX70og\nBckNFUFssirrPzvaM2GZ20LFvecPe/s3ukKIbGl7NFHrs+PnDP2K6/XCTvVd/4L7\n6t+wT3U1v6WzE2qCaCP9Dz4a8v5tMYw2JtnW2e4R0fED8BhTgFCldEdf9lZJVCHw\n7Ih92vhzJl+Ra5ZS9nDnI+f5YS9BIVI8g3XEmN8gPPzWV3Xs34j8ld4vjEw9taFY\nVL01e2fMnn7hKRQCkjQenRVdkndHS8KfBeyCI4CtsbF9MiIk26c/qHB7TMqZHLK7\nvPORax8TAgMBAAECggEACVFmcf1qOSN8jC10P7O2pkm1hNlTF3Hjd7SQbB4t3tKr\nkwi0hYRcckGvTteIhC5y/UiEVH15OjIEfPsKSQ93Zv5JSvxmuN0tAg0+8i4uScoP\nBpES3+ZC3Nyrt1IioF/W/XesoF4BDMLGO+HzVVgOZWICe3qVk5kHCPk4/0GnaUYz\n+0HOlBl7QYcOjUdJX5iUo1tmeBayMj5gqF2tMr4mWHXD1XCQAsotl624h32/w4bl\nzdtfESwWfDi/BocSSvQYQkGFeRAh2xZ0SDK9Xl0E1f55zaw7bSt1Dpo5Pfj7N2Vu\n9hrxRE4qwQvXrYFVOagDmv84PZWGSZg0TLoQmyRqAQKBgQD/GDLsuB14G8Zcm1jj\nMMxzjKYYxwLiE+rOR9FycMruw7Be31p2gbCui5UW52rqgt5VXZeS6fh3eIIqZfbc\n2A/pdpKAJ9HBPGSYZVKIU9VDHhBUlok/rqVBFq/bSJgmGeeVou0Edbny21mMsEo4\ncwFf6IbvNaJYCp7JjIbCPCROAQKBgQDglxm9o20V/ojWZYKEE0YfPn9pC/5M+GxP\nYN9YsnyV+rE4kEFhGadeYV0q7XDa007+Vq6OK5E13+xtpzku7KO3IfL+UagMvlum\nCFADOTgwbTXWESEs/qDQWbMrG+iiLnctgao96kwNWyPY+2HTcTVqqWDdp2iBey9Z\nPLmIwtNVEwKBgC2zSyRHk9f5ud7LYfBJxMcKspMLzENuaAmOqkJDXMfLvSQyBYXn\nlByhGxOgX/IlgelvPAFw8zeMGl24KLLF7ovX10UoXRauWCNJO7D6u+ErWKee1HXZ\nNvfjNZwmdEOXLnsLVkUPRkHw9CkVSCa2y88/3DSsuinltS7MgzP3DFYBAoGBAJrK\naZpTdc7P5J3nzqGa6xyDparP8lA4c+XtvWHTepyf8N8sRXNYDAu3jVAV4E9hjjMr\nqRkhm+6Gy9vzgiz+OgPxKRnxS6Kk3GO9nO/r0vdFffJxUe1B/bI78InIrXiCD+/U\nS3Jq9knKRBW7hHwHrao63SFHzXZYYZTejn1c0ezzAoGBAOxpyBS3LzicJWEgVAo+\nOGt1PsBKiuMFsclHaEevkZDV7pIn3x+TVD5f9vNZCA1uoXDrf8L69S/rihf174Oj\naU+Wp4uTzDHq+wlmQBwG5f+cKyJLVSZzyKlfFw3L5ytXfBSBy+sFj1p2dB4zyvyE\n9OjKXStKdReWu1UXK1ekhHZW\n-----END PRIVATE KEY-----\n",
+  "private_key_id": "",
+  "private_key": "",
   "client_email": "firebase-adminsdk-5b82d@presidental-vote-taichung.iam.gserviceaccount.com",
   "client_id": "111959864437911018125",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",

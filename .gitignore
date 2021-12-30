@@ -5,10 +5,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 firebase-debug.log*
+./venv
 
 # Firebase cache
 .firebase/
-venv
 
 # Firebase config
 
